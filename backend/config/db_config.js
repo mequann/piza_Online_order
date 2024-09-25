@@ -1,22 +1,20 @@
 require("dotenv").config();
-// db.js (or any file you choose for database connection)
+const { Sequelize } = require("sequelize"); // Create Sequelize instance
 
-const { Client } = require("pg");
+const sequelize = new Sequelize(process.env.DATABASE_URL);
 
-// Create a new client instance
-const client = new Client({
-  host: process.env.DB_HOST,
-  port: process.env.DB_PORT,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_DATABASE,
-});
+// Check if the connection is successful
+// sequelize
+//   .authenticate()
+//   .then(() => {
+//     console.log("Connection has been established successfully.");
+//   })
+//   .catch((err) => {
+//     console.error("Unable to connect to the database:", err.message);
+//   });
 
-// Connect to the database
-client
-  .connect()
-  .then(() => console.log("Connected to the database"))
-  .catch((err) => console.error("Connection error", err.stack));
+// sequelize.sync().then(() => {
+//   console.log(`Database & tables created!`);
+// });
 
-// Export the client for use in other modules
-module.exports = client;
+module.exports = sequelize;

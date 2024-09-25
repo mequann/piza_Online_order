@@ -1,13 +1,12 @@
-// require('dotenv').config()
+require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 
-const config = require("./config/config");
-const client = require("./config/db_config");
+const sequelize = require("./config/db_config");
 const app = express();
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
-require("dotenv").config();
+const User = require("./models/usermodel/usermodel");
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -16,7 +15,21 @@ const port = process.env.PORT || 5000;
 // const routes=require("./route/routes");
 
 // app.use("/api", routes);
+async function syncDatabase() {
+  try {
+    await sequelize.sync({ alter: true , force: true}); //edit this as needed
+    console.log("All models were synchronized successfully.");
+  } catch (error) {
+    console.error("Error occurred during model synchronization:", error);
+  }
+}
 
-app.listen(port, () => {
-  console.log(`Server running on port ${port}`);
-});
+// syncDatabase();
+
+  app.listen(port, () => {
+    console.log(`Server running on port ${port}`);
+  });
+  
+
+
+

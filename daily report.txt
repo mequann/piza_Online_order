@@ -1,0 +1,28 @@
+   Day One Task Accomplishments:
+Folder Structure Setup:
+
+ -Established a well-organized folder structure for both the frontend and backend components of the project to ensure scalability and maintainability.
+Repository Creation & Integration:
+
+Created a GitHub repository and successfully linked it with the local project files to enable version control and team collaboration.
+Database Configuration on Supabase:
+
+Configured a free cloud database on Supabase.
+Integrated Supabase with the backend server and verified connectivity by running tests to ensure smooth data transactions.
+Deployment Configuration on Render:
+
+Set up deployment pipelines on Render.
+Successfully configured the backend server for continuous deployment on Render, enabling automated updates from the GitHub repository.
+
+
+Day Two:
+
+Today, I focused on designing the database schema for the pizza ordering service. After considering the requirements, I opted to use PostgreSQL as the database and selected Sequelize as the ORM for efficient interaction with the database.
+
+Database Design:
+I structured the database to handle users, restaurants, pizzas, toppings, and orders. This design ensures scalability for multiple restaurants, with each restaurant having its own menu and list of toppings. I also accounted for role-based access control (RBAC) so that specific user roles, such as restaurant managers and customers, can have different levels of access and functionality.
+
+ORM Selection (Sequelize):
+For database operations, I chose Sequelize as it simplifies working with PostgreSQL and supports complex relationships like many-to-many associations. I set up models for User, Restaurant, Pizza, Topping, Order, and Role, ensuring that the relationships between these entities (like pizzas having multiple toppings, and users belonging to restaurants) are clear and manageable.
+
+Next steps will involve implementing these models and setting up the API to handle CRUD operations for the pizza ordering service.
