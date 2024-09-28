@@ -1,25 +1,50 @@
-const{DataTypes}=require('sequelize')
-const {Sequelize}="../../config/db_config"
+const { DataTypes } = require("sequelize");
+const sequelize = require("../../config/db_config");
 
-const Order = Sequelize.define('Order', {
+const Order = sequelize.define(
+  "Order",
+  {
     id: {
-        type: DataTypes.UUID,
-        defaultValue: DataTypes.UUIDV4,
-        primaryKey: true
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
+      primaryKey: true,
     },
     total_price: {
-        type: DataTypes.DECIMAL(10, 2),
-        allowNull: false
+      type: DataTypes.DECIMAL(10, 2),
+      allowNull: false,
+    },
+    user_id: {
+      type: DataTypes.UUID,
+      allowNull: false,
+      references: {
+        model: "Users",
+        key: "id",
+      },
+    },
+    pizza_id: {
+      type: DataTypes.UUID,
+      allowNull: false,
+      references: {
+        model: "Pizzas",
+        key: "id",
+      },
+    },
+    quantity: {
+      type: DataTypes.INTEGER, // To store the number of pizzas ordered
+      allowNull: false,
+      defaultValue: 1,
     },
     status: {
-        type: DataTypes.ENUM('Preparing', 'Delivered', 'Canceled'),
-        allowNull: false
-    }
-}, {
-    timestamps: true
-});
+      type: DataTypes.ENUM("Preparing", "Ready", "Delivered", "Canceled"),
+      allowNull: false,
+      defaultValue: "Preparing",  // Default status for new orders
+    },
+  },
+  {
+    timestamps: true, // Adds createdAt and updatedAt automatically
+  }
+);
 
-// Order.belongsTo(User, { foreignKey: 'user_id' });
-// Order.belongsTo(Restaurant, { foreignKey: 'restaurant_id' });
+// Define associations here if needed, like belongsTo User, Pizza, etc.
 
 module.exports = Order;

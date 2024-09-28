@@ -1,10 +1,10 @@
 const {DataTypes}=require('sequelize')
 
-const{Sequelize}="../../config/db_config"
-const Topping = Sequelize.define('Topping', {
+const sequelize=require("../../config/db_config");
+const Topping = sequelize.define('Topping', {
     id: {
       type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4, // Automatically generate UUIDv4
+      defaultValue: DataTypes.UUIDV4, 
       primaryKey: true,
       allowNull: false,
     },
@@ -14,7 +14,7 @@ const Topping = Sequelize.define('Topping', {
     }, 
 },{
     timestamps: true,
-    underscored: true,
+
 
 }
 )

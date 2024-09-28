@@ -1,46 +1,47 @@
-const{DataTypes}=require('sequelize')
-const {Sequelize}=require('../../config/db_config')
-const Restaurant = Sequelize.define('Restaurant', {
+const { DataTypes } = require("sequelize");
+const sequelize = require("../../config/db_config");
+const Restaurant = sequelize.define(
+  "Restaurant",
+  {
     id: {
       type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4, // Automatically generate UUIDv4
+      defaultValue: DataTypes.UUIDV4, //Automatically generate UUIDv4   b
       primaryKey: true,
       allowNull: false,
     },
-    name: {
+    restaurant_name: {
       type: DataTypes.STRING(255),
       allowNull: false, // Name is required
     },
-    location: {
-      type: DataTypes.STRING(255),
-      allowNull: false, // Location is required
-    },
+    //   superAdmin_name: {
+    //     type: DataTypes.STRING(255),
+    //     allowNull: false, // Name is required
+    //   },
+    //  address: {
+    //     type: DataTypes.STRING(255),
+    //     allowNull: false, // Location is required
+    //   },
     description: {
       type: DataTypes.TEXT,
       allowNull: true, // Description is required
     },
+    image: {
+      type: DataTypes.STRING(255),
+      allowNull: true,
+    },
     owner_id: {
       type: DataTypes.UUID,
-      allowNull: true, // Owner can be nullable after deletion
+      allowNull: true,
       references: {
-        model: 'users', // Assumes there's a 'users' table
-        key: 'id', // References 'id' in the 'users' table
+        model: "Users",
+        key: "id",
       },
-      onDelete: 'SET NULL', // Set owner_id to NULL if the user is deleted
+      // onDelete: 'SET NULL',
     },
-  }, {
-    timestamps: true, // Automatically manages createdAt and updatedAt fields
-    underscored: true, // Use snake_case column names
-   // freezeTableName: true, // Prevents Sequelize from pluralizing table names
-  });
-  
-  // Sync the model with the database
-//   sequelize.sync({ force: false })
-//     .then(() => {
-//       console.log('Restaurant table has been synchronized.');
-//     })
-//     .catch((err) => {
-//       console.error('Error syncing Restaurant table:', err);
-//     });
-  
-  module.exports = Restaurant;
+  },
+  {
+    timestamps: true,
+  }
+);
+
+module.exports = Restaurant;

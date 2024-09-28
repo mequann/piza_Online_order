@@ -1,34 +1,36 @@
-const{DataTypes}=requiure("sequelize")
-const { toDefaultValue } = require('sequelize/lib/utils')
-const{Sequelize}=require('../../config/db_config')
-const Pizza_toppings =new Sequelize.afterDefine('Pizza_toppings',{
-    id:{
-        type:DataTypes.UUID,
-        DefaultValue:DataTypes.UUIDV4,
-        primarykey:true,
-        allowNull: false,
+const { DataTypes } = require("sequelize");
+const sequelize = require("../../config/db_config");
 
+const PizzaToppings = sequelize.define(
+  "Pizza_toppings",
+  {
+    id: {
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
+      primaryKey: true,
+      allowNull: false,
     },
-    piza_id:{
-        type:DataTypes.UUID,
-        references: {
-            model: 'pizas', 
-            key: 'id', 
-          },
-          
-
+    pizza_id: {
+      type: DataTypes.UUID,
+      allowNull: false,
+      references: {
+        model: "Pizzas", // Name of the related model
+        key: "id",
+      },
     },
     topping_id: {
-        type: DataTypes.UUID,
-        allowNull: true, // Restaurant can be nullable after deletion
-        references: {
-          model: 'toppings', 
-          key: 'id', 
-        },
-        
+      type: DataTypes.UUID,
+      allowNull: false,
+      references: {
+        model: "Toppings", 
+        key: "id",
       },
+    },
+  },
+  {
+    timestamps: true,
+  
+  }
+);
 
-},{
-    timestamps:true
-})
-module.exports=Pizza_toppings
+module.exports = PizzaToppings;
