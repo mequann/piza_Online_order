@@ -1,35 +1,47 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from 'react';
+import { Routes, Route, Link } from 'react-router-dom';
+import './App.css';
+import Navbar from './markup/components/Nabbar/Navbar';
+import Footer from './markup/components/Footer/Footer';
+import Home from './markup/pages/Home/Home';
+import SignUp from './markup/components/Forms/SignUp';
+import Login from './markup/components/Forms/Login';
+import Dashboard from './markup/pages/Dashboard/DashBoard'; 
+import OrdersTable from './markup/components/DashBbordComponents/OrderTable';
+import UserTable from './markup/components/DashBbordComponents/UserTable';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      {/* Main Navbar */}
+      <Navbar />
+
+      {/* Main Route structure */}
+      <Routes>
+        {/* Home route */}
+        <Route path='/' element={<><Home /> <Footer /></>} />
+        
+        {/* Sign Up route */}
+        <Route path='/signup' element={<SignUp />} />
+        
+        {/* Login route */}
+        <Route path='/login' element={<Login />} />
+        
+        {/* Dashboard route with nested paths */}
+        <Route path='/menu' element={<Dashboard />}>
+          {/* Nested routes within the dashboard */}
+          <Route path='orders' element={<OrdersTable  />} />
+          <Route path='users' element={<UserTable />} />
+          {/* <Route path='add-menu' element={<AddMenuComponent />} /> */}
+        </Route>
+      </Routes>
+
+      {/* Footer */}
+      
     </>
-  )
+  );
 }
 
-export default App
+export default App;
