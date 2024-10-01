@@ -1,7 +1,15 @@
 import React from "react";
 import { Card, CardContent, CardMedia, Typography, Button, Grid } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const Cards = ({ pizza }) => {
+    const navigate = useNavigate();
+
+    const handleOrderClick = () => {
+        // Navigate to the OrderPage and pass the pizza data as state
+        navigate('/order', { state: pizza });
+    };
+
     return (
         <Card sx={{ maxWidth: 500, margin: "auto", borderRadius: 2 }}>
             <CardMedia
@@ -32,7 +40,7 @@ const Cards = ({ pizza }) => {
                         <Typography variant="h6" color="text.primary">
                             ${pizza.price.toFixed(2)}
                         </Typography>
-                        <Button variant="contained" color="warning">
+                        <Button variant="contained" color="warning" onClick={handleOrderClick}>
                             Order
                         </Button>
                     </Grid>

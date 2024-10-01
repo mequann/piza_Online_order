@@ -9,6 +9,9 @@ import Login from './markup/components/Forms/Login';
 import Dashboard from './markup/pages/Dashboard/DashBoard'; 
 import OrdersTable from './markup/components/DashBbordComponents/OrderTable';
 import UserTable from './markup/components/DashBbordComponents/UserTable';
+import RoleTable from './markup/components/DashBbordComponents/RoleTable';
+import AddMenuForm from './markup/components/Forms/AddMenuForm';
+import OrderPage from './markup/pages/Order/OrderPage';
 
 function App() {
   const [count, setCount] = useState(0);
@@ -34,8 +37,11 @@ function App() {
           {/* Nested routes within the dashboard */}
           <Route path='orders' element={<OrdersTable  />} />
           <Route path='users' element={<UserTable />} />
-          {/* <Route path='add-menu' element={<AddMenuComponent />} /> */}
+          <Route path='roles' element={<RoleTable/>} />
+          <Route path='add-menu' element={<AddMenuForm/>} />  
         </Route>
+        <Route path='/order' element={<OrderPage/>} />
+        <Route path='*' element={<p>There's nothing here: 404!</p>} />
       </Routes>
 
       {/* Footer */}

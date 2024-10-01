@@ -118,7 +118,7 @@ const Navbar = () => {
                 <Button
                   color="inherit"
                   component={Link}
-                  to="/orders"
+                  to="/menu/orders"
                   sx={{
                     "&:hover": {
                       color: "#FF8C14",

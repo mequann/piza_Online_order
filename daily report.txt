@@ -26,3 +26,11 @@ ORM Selection (Sequelize):
 For database operations, I chose Sequelize as it simplifies working with PostgreSQL and supports complex relationships like many-to-many associations. I set up models for User, Restaurant, Pizza, Topping, Order, and Role, ensuring that the relationships between these entities (like pizzas having multiple toppings, and users belonging to restaurants) are clear and manageable.
 
 Next steps will involve implementing these models and setting up the API to handle CRUD operations for the pizza ordering service.
+
+
+
+Day Three Progress:
+
+Today, I successfully completed the majority of the API development and rigorously tested the functionalities using Postman as my client. During testing, I verified key features such as data retrieval, creation, updates, and deletion, ensuring each API endpoint works as expected.
+
+While the core functionalities are now in place, there are still some parts of the API that require further attention. My plan is to focus on completing these remaining tasks and refining any areas that need improvement. Additionally, I will begin debugging and addressing any issues or inconsistencies that arise during the final testing phase to ensure the API is robust and production-ready.

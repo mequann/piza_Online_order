@@ -43,8 +43,8 @@ const UserTable = () => {
           sx={{
             backgroundColor: cell.getValue() ? 'green' : 'red', 
             color: 'white',
-            borderRadius: '20px', // Curved corners for the button
-            padding: '0px 4px',  // Adjust padding for a nice look
+            borderRadius: '20px',
+            padding: '0px 4px',  
             '&:hover': {
               backgroundColor: cell.getValue() ? 'darkgreen' : 'darkred',
             },
