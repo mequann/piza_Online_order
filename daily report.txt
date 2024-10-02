@@ -34,3 +34,8 @@ Day Three Progress:
 Today, I successfully completed the majority of the API development and rigorously tested the functionalities using Postman as my client. During testing, I verified key features such as data retrieval, creation, updates, and deletion, ensuring each API endpoint works as expected.
 
 While the core functionalities are now in place, there are still some parts of the API that require further attention. My plan is to focus on completing these remaining tasks and refining any areas that need improvement. Additionally, I will begin debugging and addressing any issues or inconsistencies that arise during the final testing phase to ensure the API is robust and production-ready.
+
+
+Final Project Submission for Evaluation:
+
+I have put in significant effort to complete the project, and I am pleased to submit it for your evaluation. You can view the project on GitHub via the following link: https://github.com/mequann/piza_Online_order. Thank you for your time and consideration. I look forward to hearing your feedback soon.
