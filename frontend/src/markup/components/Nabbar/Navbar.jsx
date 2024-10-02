@@ -15,6 +15,7 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
+import logo from "../../../assets/logo.png";
 
 const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -27,11 +28,7 @@ const Navbar = () => {
 
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
-      <img
-        src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
-        alt="logo"
-        width="50"
-      />
+      <img src={logo} alt="logo" width="50" />
       <List>
         <ListItem button component={Link} to="/">
           <ListItemText primary="Home" />
@@ -56,7 +53,10 @@ const Navbar = () => {
 
   return (
     <>
-      <AppBar position="static" sx={{ bgcolor: "#FFF3E7", color: "black",maxWidth:"100%"}}>
+      <AppBar
+        position="static"
+        sx={{ bgcolor: "#FFF3E7", color: "black", maxWidth: "100%", pb: 3 }}
+      >
         <Toolbar>
           {isMobile ? (
             <>
@@ -90,11 +90,10 @@ const Navbar = () => {
                 width: "100%",
               }}
             >
-              <img
-                src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
-                alt="logo"
-                width="50"
-              />
+              <img src={logo} alt="logo" width="50" />
+              <Typography variant="h5" color="orange" pl={1} mt={1}>
+                Pizza
+              </Typography>
               <Box
                 sx={{
                   display: "flex",

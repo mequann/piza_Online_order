@@ -8,13 +8,15 @@ import {
   Typography,
   
 } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import api from "../../../util/api";
 
 const Login = () => {
   const [formData, setFormData] = React.useState({
     email: "",
     password: "",
   });
+  const Navigate=useNavigate()
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -24,10 +26,25 @@ const Login = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = async(e) => {
+    try {
+      
+      e.preventDefault();
     // Add your login submission logic here
-    console.log(formData);
+     const res =await api.post('/login',formData)
+     if(res){
+      const token = res.data.token;
+      console.log(token)
+       localStorage.setItem('token', token);
+      console.log(res.data)
+     }
+     Navigate('/menu/orders')
+
+    } catch (error) {
+      console.log(error)
+      return error
+      
+    }
   };
 
   return (
@@ -95,7 +112,7 @@ const Login = () => {
 
             {/* Login Button */}
             <Grid item xs={12}>
-              <Button
+              <Button 
                 type="submit"
                 variant="contained"
                 fullWidth

@@ -19,6 +19,7 @@ const userSchema = z.object({
 const createUser = async (req, res) => {
   try {
     const data = req.body;
+    console.log(data,'data trst')
     const parsedData = userSchema.parse(data);
 
     // Get the current user's abilities (if any)

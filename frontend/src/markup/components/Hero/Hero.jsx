@@ -21,26 +21,28 @@ const sliderSettings = {
 
 const Hero = () => {
   return (
-    <div sx={{mx:'auto',backgroundColor: "#FFF8F1",}}>
+    <div sx={{ mx: "auto", backgroundColor: "#FFF8F1"}}>
       <Box
         sx={{
           width: "100%",
-          height: "500px",
+          height: "706px",
           overflow: "hidden",
-           // background: #FFF8F1;
-          
+          // background: #FFF8F1;
 
-          marginRight:"20px",
-          marginLeft:"20px"
+          marginRight: "20px",
+          marginLeft: "20px",
         }}
       >
-        <Typography variant="h4"  sx={{ textAlign: "center", margin: "20px 0" ,color:"#00000080"}}>
+        <Typography
+          variant="h4"
+          sx={{ textAlign: "center", margin: "20px 0", color: "#00000080" }}
+        >
           Featured Pizza
         </Typography>
         <Slider {...sliderSettings}>
           {/* Slide 1 */}
           <Box
-            sx={{ height: "500px", borderRadius: "60px", overflow: "hidden"}}
+            sx={{ height: "386px", borderRadius: "60px", overflow: "hidden" }}
           >
             <Grid container sx={{ height: "100%" }}>
               {/* Text Box on the Left (70%) */}
@@ -57,7 +59,7 @@ const Hero = () => {
                     color: "white",
                     textAlign: "left",
                     padding: 4,
-                    borderRadius:"40px"
+                    borderRadius: "40px",
                   }}
                 >
                   <Typography variant="h3">Make Your First Order</Typography>
@@ -82,7 +84,7 @@ const Hero = () => {
                 </Grid>
 
                 {/* Image Box on the Right (30%) */}
-                <Grid item xs={4} >
+                <Grid item xs={4}>
                   <img
                     src={banner2}
                     alt=""
@@ -95,13 +97,16 @@ const Hero = () => {
 
           {/* Slide 2 */}
           <Box
-            sx={{backgroundColor:"#50482B" ,height: "500px", borderTopLeftRadius: "60px",
-              borderTopRightRadius: "40px",
-              borderBottomRightRadius: "50px",
-              borderBottomLeftRadius: "40px", overflow: "hidden" }}>
+            sx={{
+              backgroundColor: "#50482B",
+              height: "386px",
+              borderRadius: "40px",
+              overflow: "hidden",
+            }}
+          >
             <Grid container sx={{ height: "100%" }}>
               {/* Text Box on the Left (70%) */}
-              <Box sx={{display: "flex" }}>
+              <Box sx={{ display: "flex" }}>
                 <Grid
                   item
                   xs={8}
@@ -151,11 +156,16 @@ const Hero = () => {
 
           {/* Slide 3 */}
           <Box
-            sx={{backgroundColor:"#296D60",height: "500px", borderRadius: "60px", overflow: "hidden" }}
+            sx={{
+              backgroundColor: "#296D60",
+              height: "386px",
+              borderRadius: "40px",
+              overflow: "hidden",
+            }}
           >
             <Grid container sx={{ height: "100%" }}>
               {/* Text Box on the Left (70%) */}
-              <Box sx={{ backgroundColor:"#296D60",display: "flex"}}>
+              <Box sx={{ backgroundColor: "#296D60", display: "flex" }}>
                 <Grid
                   item
                   xs={8}

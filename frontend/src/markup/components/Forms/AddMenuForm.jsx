@@ -8,6 +8,7 @@ import {
   Box,
   Grid,
 } from "@mui/material";
+import api from "../../../util/api";
 
 const AddMenuForm = () => {
   const [newMenu, setNewMenu] = useState({
@@ -19,11 +20,11 @@ const AddMenuForm = () => {
       onions: false,
       olives: false,
     },
-    customToppings: [], // Array to hold custom toppings with checkbox
+    customToppings: [],
     price: "",
-    photo: null,
-    newCustomTopping: "", // State for the new custom topping
-    showCustomInput: false, // State to show/hide custom topping input
+    image: null,
+    newCustomTopping: "",
+    showCustomInput: false,
   });
 
   const handleInputChange = (e) => {
@@ -64,10 +65,10 @@ const AddMenuForm = () => {
             name: newMenu.newCustomTopping,
             checked: true,
             key: customToppingKey,
-          }, // Create a custom topping object
+          },
         ],
-        newCustomTopping: "", // Reset input field after adding
-        showCustomInput: false, // Hide input after adding
+        newCustomTopping: "",
+        showCustomInput: false,
       }));
     }
   };
@@ -86,13 +87,34 @@ const AddMenuForm = () => {
   const handlePhotoChange = (e) => {
     setNewMenu((prevData) => ({
       ...prevData,
-      photo: e.target.files[0],
+      image: e.target.files[0],
     }));
   };
 
-  const handleSubmit = () => {
-    // Handle add menu logic here
-    console.log({ ...newMenu, createdAt: new Date() });
+  const handleSubmit = async (event) => {
+    event.preventDefault(); 
+
+    const formData = new FormData();
+    formData.append("name", newMenu.name);
+    formData.append("price", newMenu.price);
+    formData.append("image", newMenu.image);
+    formData.append("toppings", JSON.stringify(Object.keys(newMenu.toppings).filter(topping => newMenu.toppings[topping])));
+    formData.append("customToppings", JSON.stringify(newMenu.customToppings));
+    try {
+      const token = localStorage.getItem('token');
+      console.log(token,'kkkkkkkkkkkk')
+    const config = {
+      headers: {
+        'Authorization': `Bearer ${token}`, 
+        'Content-Type': 'multipart/form-data',
+      },
+    };
+
+      const response = await api.post("/menu", formData,config);
+      console.log(response.data, "from add menu");
+    } catch (error) {
+      console.log(error,"hhhhhhhhhhhhhhhh");
+    }
     resetForm();
   };
 
@@ -108,9 +130,9 @@ const AddMenuForm = () => {
       },
       customToppings: [],
       price: "",
-      photo: null,
-      newCustomTopping: "", // Reset new custom topping input
-      showCustomInput: false, // Reset custom input visibility
+      image: null,
+      newCustomTopping: "",
+      showCustomInput: false,
     });
   };
 
@@ -121,6 +143,7 @@ const AddMenuForm = () => {
         flexDirection: "column",
         alignItems: "center",
         width: "100%",
+        padding: "1rem",
       }}
     >
       <Typography variant="h4" sx={{ mb: 2 }}>
@@ -144,12 +167,7 @@ const AddMenuForm = () => {
         <Typography variant="h6" sx={{ my: 2 }}>
           Toppings
         </Typography>
-        <Grid
-          container
-          spacing={2}
-          justifyContent="center"
-          sx={{ width: "100%" }}
-        >
+        <Grid container spacing={2} sx={{ width: "100%" }}>
           {Object.keys(newMenu.toppings).map((topping) => (
             <Grid item xs={12} sm={6} key={topping}>
               <FormControlLabel
@@ -168,8 +186,12 @@ const AddMenuForm = () => {
           {!newMenu.showCustomInput && (
             <Grid item xs={12} sm={6}>
               <Button
+                sx={{
+                  borderRadius: "50px",
+                  backgroundColor: "orange",
+                  width: "100%",
+                }}
                 variant="outlined"
-                sx={{ borderRadius: "10px", backgroundColor: "orange" }}
                 onClick={() =>
                   setNewMenu((prev) => ({ ...prev, showCustomInput: true }))
                 }
@@ -181,19 +203,18 @@ const AddMenuForm = () => {
 
           {/* New Custom Topping Input Field */}
           {newMenu.showCustomInput && (
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12}>
               <TextField
                 label="New Topping"
                 variant="outlined"
                 value={newMenu.newCustomTopping}
                 onChange={handleNewCustomToppingChange}
                 fullWidth
-                sx={{ mr: 1 }}
               />
               <Button
-                variant="outlined"
+                variant="contained"
                 onClick={addCustomTopping}
-                sx={{ width: "6px" }}
+                sx={{ mt: 1 }}
               >
                 Add
               </Button>
@@ -202,12 +223,7 @@ const AddMenuForm = () => {
         </Grid>
 
         {/* Render Custom Toppings with Checkbox */}
-        <Grid
-          container
-          spacing={2}
-          justifyContent="center"
-          sx={{ width: "100%", mt: 2 }}
-        >
+        <Grid container spacing={2} sx={{ mt: 2 }}>
           {newMenu.customToppings.map((topping) => (
             <Grid item xs={12} sm={6} key={topping.key}>
               <FormControlLabel
@@ -240,6 +256,7 @@ const AddMenuForm = () => {
         <Button
           variant="contained"
           component="label"
+          fullWidth
           sx={{ my: 2, backgroundColor: "orange" }}
         >
           Upload Pizza Photo
@@ -248,13 +265,13 @@ const AddMenuForm = () => {
 
         {/* Actions */}
         <Box sx={{ mt: 2, display: "flex", justifyContent: "space-between" }}>
-          <Button onClick={resetForm} color="error" sx={{ mr: 2 }}>
+          <Button onClick={resetForm} color="error" fullWidth sx={{ mr: 1 }}>
             Cancel
           </Button>
           <Button
             onClick={handleSubmit}
             variant="contained"
-            color="warning"
+            fullWidth
             sx={{ backgroundColor: "orange" }}
           >
             Submit

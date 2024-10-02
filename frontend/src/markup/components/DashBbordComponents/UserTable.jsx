@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { MaterialReactTable, useMaterialReactTable } from 'material-react-table';
 import { Switch, Button } from '@mui/material';
 import { Box } from '@mui/system';
-import DeleteIcon from '@mui/icons-material/Delete'; // Importing the trash icon
+import DeleteIcon from '@mui/icons-material/Delete';
 import AddUserForm from '../Forms/AddUserForm';
+import api from '../../../util/api';
+
 const UserTable = () => {
   const [data, setData] = useState([
     { id: 1, name: 'John Doe', phone: '+251 1234567890', email: 'john@example.com', isActive: true },
@@ -12,23 +14,40 @@ const UserTable = () => {
   ]);
   const [open, setOpen] = useState(false);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await api.get('/users');
+        setData(response.data);
+      } catch (error) {
+        console.error(error.message);
+      }
+    };
+    fetchData();
+  }, []);
+
   const handleToggleActive = (rowIndex) => {
     const updatedData = [...data];
-    updatedData[rowIndex].isActive = !updatedData[rowIndex].isActive; // Toggle active status
+    updatedData[rowIndex].isActive = !updatedData[rowIndex].isActive;
     setData(updatedData);
   };
 
   const handleDeleteUser = (rowIndex) => {
-    const updatedData = data.filter((_, index) => index !== rowIndex); // Delete user by index
+    const updatedData = data.filter((_, index) => index !== rowIndex);
     setData(updatedData);
   };
 
-  const handleAddUser = () => {
-    // Logic to add a new user (implement your own logic here)
-    console.log("Add User button clicked!");
+  const handleAddUser = async (newUser) => {
+    try {
+      const response = await api.post('/users', newUser);
+      console.log(response.data);
+    } catch (error) {
+      console.error(error.message);
+    }
   };
-  const handleOpen = () => setOpen(true); // Open modal
-  const handleClose = () => setOpen(false); // Close modal
+
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   const columns = [
     { accessorKey: 'name', header: 'Name' },
@@ -41,21 +60,23 @@ const UserTable = () => {
         <Button
           variant="contained"
           sx={{
-            backgroundColor: cell.getValue() ? 'green' : 'red', 
+            backgroundColor: cell.getValue() ? 'green' : 'red',
             color: 'white',
             borderRadius: '20px',
-            padding: '0px 4px',  
+            padding: '0px 2px',
+            fontSize: { xs: '10px', sm: '12px' }, // Responsive font size
             '&:hover': {
               backgroundColor: cell.getValue() ? 'darkgreen' : 'darkred',
             },
           }}
-          onClick={() => handleToggleActive(row.index)} // Switch toggles on click
+          onClick={() => handleToggleActive(row.index)}
         >
           <Switch
-            checked={cell.getValue()} // Active state for the switch
-            onClick={() => handleToggleActive(row.index)} // Toggle active status on click
+            checked={cell.getValue()}
+            onClick={() => handleToggleActive(row.index)}
             color="default"
-            sx={{ pointerEvents: 'none' }} // Disable dragging interaction on the switch
+            size='small'
+            sx={{ pointerEvents: 'none' }}
           />
           {cell.getValue() ? 'Active' : 'Inactive'}
         </Button>
@@ -69,9 +90,9 @@ const UserTable = () => {
           variant="contained"
           color="error"
           onClick={() => handleDeleteUser(row.index)}
-          sx={{ minWidth: 'auto', padding: '6px', backgroundColor: 'darkgray', borderRadius: '12px' }} // Curved corners for delete button
+          sx={{ minWidth: 'auto', padding: '6px', backgroundColor: 'darkgray', borderRadius: '12px' }}
         >
-          <DeleteIcon fontSize="small" /> {/* Using trash icon */}
+          <DeleteIcon fontSize="small" />
         </Button>
       ),
     },
@@ -81,9 +102,8 @@ const UserTable = () => {
     data,
     columns,
     enableRowSelection: false,
-    // Adding a title to the top-left of the top toolbar
     renderTopToolbarCustomActions: () => (
-      <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, ml: 5 }}>
+      <Box sx={{ ml: 2, justifyContent: 'center' }}>
         <Button
           variant="contained"
           onClick={handleOpen}
@@ -96,24 +116,24 @@ const UserTable = () => {
   });
 
   return (
-  <>
-    <Box sx={{ display: 'flex', justifyContent: 'center', my: 4 }}>
-      <MaterialReactTable 
-        table={table} 
-        sx={{ 
-          width: '100%', 
-          maxWidth: '1200px', 
-          '& .MuiTableRow-root': { height: '40px' } // Adjust row height here
-        }} 
+    <>
+      <Box sx={{ display: 'flex', justifyContent: 'center', my: 4, mx: { xs: 2, sm: 'auto' } }}>
+        <MaterialReactTable
+          table={table}
+          sx={{
+            width: '100%',
+            maxWidth: { xs: '100%', sm: '1200px' }, // Responsive max width
+            '& .MuiTableRow-root': { height: 'auto' },
+            overflowX: 'auto', // Enable horizontal scrolling on small screens
+          }}
+        />
+      </Box>
+      <AddUserForm
+        open={open}
+        handleClose={handleClose}
+        handleAddUser={handleAddUser}
       />
-    </Box>
-    {/* Modal for Adding a New User */}
-    <AddUserForm 
-    open={open} 
-    handleClose={handleClose} 
-    handleAddUser={handleAddUser} 
-  />
-  </>
+    </>
   );
 };
 

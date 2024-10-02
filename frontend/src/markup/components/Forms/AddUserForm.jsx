@@ -7,7 +7,7 @@ const roles = ['Admin', 'User', 'Editor', 'Viewer']; // Example roles
 
 const AddUserForm = ({ open, handleClose, handleAddUser }) => {
   const [newUser, setNewUser] = useState({
-    name: '',
+    full_name:'',
     email: '',
     password: '',
     phone: '',
@@ -23,9 +23,9 @@ const AddUserForm = ({ open, handleClose, handleAddUser }) => {
   };
 
   const handleSubmit = () => {
-    handleAddUser(newUser); // Pass the new user to the parent component (UserTable)
-    handleClose(); // Close the modal after submission
-    setNewUser({ name: '', email: '', password: '', phone: '', role: '' }); // Reset form fields
+    handleAddUser(newUser);
+    handleClose(); 
+    setNewUser({ full_name: '', email: '', password: '', phone: '', role: '' }); 
   };
 
   return (
@@ -36,7 +36,7 @@ const AddUserForm = ({ open, handleClose, handleAddUser }) => {
         <TextField
           label="Name"
           variant="outlined"
-          name="name"
+          name="full_name"
           value={newUser.name}
           onChange={handleInputChange}
           fullWidth

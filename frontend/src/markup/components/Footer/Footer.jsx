@@ -62,7 +62,7 @@ const Footer = () => {
             <Button
               color="inherit"
               component={Link}
-              to="/orders"
+              to="/menu/orders"
               sx={{
                 color: "#000000",
                 "&:hover": {

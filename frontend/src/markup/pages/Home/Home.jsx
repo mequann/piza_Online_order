@@ -22,7 +22,7 @@ const Home = () => {
     width: "100%",
     textAlign: "center",
     background: "linear-gradient(180deg, #FFFFFF 0%, #FFC993 76%, #FFF8F1 100%)",
-    padding: 4,
+    padding: 0,
   }}
 >
   <Grid container spacing={3} alignItems="center">
