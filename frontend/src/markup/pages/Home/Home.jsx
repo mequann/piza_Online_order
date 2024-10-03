@@ -7,7 +7,7 @@ import {
   InputAdornment,
   Grid
 } from "@mui/material";
-import image from "../../../assets/imagehero.png";
+import heroImage from "../../../assets/imagehero.png";
 import flower from "../../../assets/imageflower.png";
 import SearchIcon from "@mui/icons-material/Search";
 import Hero from "../../components/Hero/Hero";
@@ -106,7 +106,7 @@ const Home = () => {
     <Grid item xs={12} sm={4}>
       <Box>
         <img
-          src={image}
+          src={heroImage}
           alt="hero"
           style={{
             width: "100%",
