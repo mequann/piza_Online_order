@@ -7,7 +7,7 @@ import {
   InputAdornment,
   Grid
 } from "@mui/material";
-import heroImage from "../../../assets/imagehero.png";
+import heroImage from "../../assets/imagehero.png";
 import flower from "../../../assets/imageflower.png";
 import SearchIcon from "@mui/icons-material/Search";
 import Hero from "../../components/Hero/Hero";
