@@ -13,10 +13,11 @@ import SearchIcon from "@mui/icons-material/Search";
 import Hero from "../../components/Hero/Hero";
 import PizzaRender from "../../components/Cards/PizzaRender";
 import TopRestaurantsCard from "../../components/Cards/ToprestaurantsCard";
-// const heroImage = () => import(`../../../assets/imagehero.png`);
+
 
 
 const Home = () => {
+  console.log(flower,{heroImage})
   return (
     <>
  <Box
