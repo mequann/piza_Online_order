@@ -1,7 +1,7 @@
 import React from "react";
 import { Grid } from "@mui/material";
 import Card from "./Card";
-import piza_photo from "../../../assets/imagepizza_photo.png";
+import piza_photo from "../../../assets/Imagepizza_photo.png";
 const pizzas = [
   {
     name: "Pepperoni Pizza",
