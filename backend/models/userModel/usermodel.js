@@ -1,5 +1,5 @@
 const { DataTypes } = require("sequelize");
-const bcrypt = require("bcrypt");
+const bcrypt = require('bcryptjs');
 const sequelize = require("../../config/db_config");
 const Role = require("../roleModel/roleM");
 
