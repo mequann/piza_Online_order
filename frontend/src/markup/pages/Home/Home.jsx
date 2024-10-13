@@ -8,7 +8,7 @@ import {
   Grid
 } from "@mui/material";
 import heroImage from "../../../assets/hero.png";
-import flower from "../../../assets/imageflower.png";
+import flower from "../../../assets/Imageflower.png";
 import SearchIcon from "@mui/icons-material/Search";
 import Hero from "../../components/Hero/Hero";
 import PizzaRender from "../../components/Cards/PizzaRender";
